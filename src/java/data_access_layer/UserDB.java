@@ -108,14 +108,14 @@ public class UserDB
         
         try
         {
-            Role userRole = inputUser.getRole();
-            
-            //make sure the role object no longer contains the new user
-            userRole.getUserList().remove(inputUser);
-            
             entityTransaction.begin();
             
-            User confirmedUser = entityManager.merge(inputUser);
+            User confirmedUser = entityManager.merge(this.get(inputUser.getEmail()));
+            
+            Role userRole = confirmedUser.getRole();
+            
+            //make sure the role object no longer contains the new user
+            userRole.getUserList().remove(confirmedUser);
             
             entityManager.remove(confirmedUser);
             

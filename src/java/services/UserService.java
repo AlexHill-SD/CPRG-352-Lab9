@@ -60,7 +60,7 @@ public class UserService
     public void delete(String inputEmail) throws Exception 
     {
         UserDB userConnection = new UserDB();
-        User tempUser = userConnection.get(inputEmail);
+        User tempUser = new User(inputEmail);
         userConnection.delete(tempUser);
     }
 }
